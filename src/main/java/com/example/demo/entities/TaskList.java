@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.entities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,6 @@ public class TaskList {
         this.taskList.add(task);
     }
 
-
     public void removeTask(String description) {
         this.taskList = taskList.stream().filter(t ->
                 !t.getDescription().equals(description)
@@ -25,7 +24,7 @@ public class TaskList {
     }
 
     public void removeTask2(String description) {
-                this.taskList.removeIf(t-> t.getDescription().equals(description));
+        this.taskList.removeIf(t -> t.getDescription().equals(description));
     }
 
     public List<Task> getTaskList() {
