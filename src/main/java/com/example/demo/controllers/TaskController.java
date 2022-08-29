@@ -1,25 +1,34 @@
 package com.example.demo.controllers;
 
 //import com.example.demo.entities.Task;
-import com.example.demo.entities.TaskList;
-import com.example.demo.services.TaskService;
-import org.springframework.context.annotation.Bean;
+import com.example.demo.entities.Task;
+import com.example.demo.services.ITaskService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 
-@RestController
+import java.util.List;
+
+@Controller
 public class TaskController {
-    TaskService services;
+    //TaskService services;
 
-    public TaskController() {
-        this.services = new TaskService();
+    private final ITaskService taskService;
+    public TaskController(ITaskService taskService) {
+        this.taskService = taskService;
+        //this.services = new TaskService();
     }
 
     @GetMapping("/task")
-    public TaskList taskList(){
-        return this.services.getTaskLists();
+    public List taskList(){
+        //return this.services.getTaskLists();
+        var tasks = (List<Task>) taskService.findAll();
+
+        //var params = new HashMap<String, Object>();
+        //params.put("countries", countries);
+
+        //return new ModelAndView("showCountries", params);
+        return tasks;
     }
 
 /*    public Task taskList1(){

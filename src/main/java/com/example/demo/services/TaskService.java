@@ -2,10 +2,13 @@ package com.example.demo.services;
 
 import com.example.demo.entities.Task;
 import com.example.demo.entities.TaskList;
+import com.example.demo.repositories.TaskRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 
-public class TaskService {
+
+public class TaskService implements ITaskService{
     Task t1;
     Task t2;
     Task t3;
@@ -13,7 +16,9 @@ public class TaskService {
     Task t5;
     TaskList meta;
 
-    public TaskService(){
+    private final TaskRepository repository;
+
+    public TaskService(TaskRepository repository){
         this.t1 = new Task("Descripcion 1", false, LocalDate.of(2022, 1, 1));
         this.t2 = new Task("Descripcion 2", false, LocalDate.of(2022, 2, 10));
         this.t3 = new Task("Descripcion 3", false, LocalDate.of(2021, 10, 10));
@@ -25,11 +30,17 @@ public class TaskService {
         this.meta.addTask(t2);
         this.meta.addTask(t3);
         this.meta.addTask(t4);
-        this.meta.addTask(t5);
-        //return meta;
+        this.meta.addTask(t5);//return meta;
+        this.repository = repository;
     }
 
-    public TaskList getTaskLists(){
+     public TaskList getTaskLists(){
         return this.meta;
+    }
+
+    @Override
+    public List<Task> findAll() {
+
+        return (List<Task>) repository.findAll();
     }
 }
