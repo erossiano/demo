@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.Task;
 import com.example.demo.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +16,9 @@ public class TaskService{
 
     public List getTaskLists() {
         return this.repository.findAll();
+    }
+
+    public Task createTask(Task task) {
+        return this.repository.save(task);
     }
 }
