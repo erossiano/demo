@@ -20,11 +20,11 @@ public class TaskController {
         this.service = service;
     }
 
-    @GetMapping("/tasks")
+/*    @GetMapping("/tasks")
     public List taskList(){
         List tasks = this.service.getTaskLists();
         return tasks;
-    }
+    }*/
 
     @PostMapping("/tasks")
     public Task taskSave(@RequestBody Task task) {
