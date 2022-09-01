@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" xmlns:th="https://www.thymeleaf.org/">
+<html lang="es" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -12,12 +12,21 @@
 <body>
   <main>
       <div class="px-4 pt-5 my-5 text-center border-bottom">
-          <h1 class="display-4 fw-bold">Task App</h1>
+          <h1 class="display-4 fw-bold">Sistema de Gestion de Tareas</h1>
           <div class="col-lg-6 mx-auto">
+              <div sec:authorize="isAuthenticated()">
+                <h3 th:text="'Bienvenido, ' + ${user.getEmail()}"></h3>
+              </div>
               <p class="lead mb-4">Crea y administra lista de tareas rápidas en la web.</p>
               <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
                   <button id="btnHome" onclick="window.location.href='/'" type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Home</button>
-                  <button id="btnTask" onclick="window.location.href='/tasks'" type="button" class="btn btn-outline-secondary btn-lg px-4">To Do List</button>
+
+                  <div sec:authorize="isAuthenticated()">
+                      <button id="btnTask" onclick="window.location.href='/tasks'" type="button" class="btn btn-outline-secondary btn-lg px-4">To Do List</button>
+                  </div>
+                  <div sec:authorize="!isAuthenticated()">
+                      <a th:href="@{/oauth2/authorization/auth0}" type="button" class="btn btn-outline-secondary btn-lg px-4">Log In</a>
+                  </div>
               </div>
           </div>
           <div class="overflow-hidden" style="max-height: 30vh;">

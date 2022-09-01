@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -11,14 +11,18 @@
 </head>
 <body>
     <main>
-        <div class="px-4 pt-5 my-5 text-center">
-            <h1 class="display-4 fw-bold">Tasks</h1>
-            <div class="col-lg-6 mx-auto">
+        <div class="px-4 pt-5 my-5 text-center d-flex flex-column align-items-center">
+            <div class="mb-4">
+                <h1 class="display-5 fw-bold mb-4">Tasks</h1>
                 <p class="lead mb-4">Listado de tareas rápidas en la web.</p>
+                <div class="mx-auto">
+                    <button id="btnReturnTaskLst" onclick="window.location.href='/'" type="button" class="btn btn-secondary">Regresar</button>
+                    <button id="btnNewTask" onclick="window.location.href='/task/new'" type="button" class="btn btn-primary px-4 me-sm-3">Nueva</button>
+                </div>
             </div>
-            <div>
+            <div class="d-flex gap-4 justify-content-start" style="flex-flow: wrap">
 
-                <div th:each="task : ${tasks}" class="card" style="width: 10rem;">
+                <div th:each="task : ${tasks}" class="card" style="max-width: 12em ;min-width: 10em;">
 
                     <div th:switch="${task.done}">
                         <img th:case="true" src="img/task-done.png" class="card-img-top" alt="Done">
@@ -27,9 +31,17 @@
                     <div class="card-body">
                         <h5 class="card-title" th:text="${task.description}">Card title</h5>
                         <p class="card-text" th:text="${task.dueDate}"></p>
-                        <div th:if="!${task.done}">
-                            <a href="#" class="btn btn-primary">Mark as Done</a>
-                        </div>
+
+                            <div class="d-flex flex-column gap-3 xcol-lg-6 xmx-auto">
+                                <div th:if="!${task.done}">
+                                <form th:action="@{/tasks/{id}(id=${task.id})}" th:method="patch">
+                                    <button id="btnDone" onclick="window.location.href='/tasks'" type="submit" class="btn btn-primary btn-lg px-4 me-sm-3">Done</button>
+                                </form>
+                                </div>
+                                <form th:action="@{/tasks/{id}(id=${task.id})}" th:method="delete">
+                                    <button id="btnDelete" onclick="window.location.href='/tasks'" type="submit" class="btn btn-danger btn-lg px-4 me-sm-3">Delete</button>
+                                </form>
+                            </div>
                     </div>
                 </div>
             </div>

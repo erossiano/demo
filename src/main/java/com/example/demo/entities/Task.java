@@ -2,14 +2,14 @@ package com.example.demo.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
+
 
 @Entity
 @Table
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    public long id;
     @Column
     String description;
     @Column
@@ -24,11 +24,11 @@ public class Task {
         this.dueDate = date;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
