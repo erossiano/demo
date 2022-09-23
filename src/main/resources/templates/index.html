@@ -22,7 +22,7 @@
                   <button id="btnHome" onclick="window.location.href='/'" type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Home</button>
 
                   <div sec:authorize="isAuthenticated()">
-                      <button id="btnTask" onclick="window.location.href='/tasks'" type="button" class="btn btn-outline-secondary btn-lg px-4">To Do List</button>
+                      <button id="btnTask" onclick="window.location.href='/tasks'" type="button" class="btn btn-outline-secondary btn-lg px-4">Ir a lista de tareas</button>
                   </div>
                   <div sec:authorize="!isAuthenticated()">
                       <a th:href="@{/oauth2/authorization/auth0}" type="button" class="btn btn-outline-secondary btn-lg px-4">Log In</a>

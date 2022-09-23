@@ -14,11 +14,11 @@ import java.util.List;
 
 @Controller
 public class FrontController {
-    TaskService service;
+    TaskService taskService;
     UserServices userService;
 
     public FrontController(TaskService service, UserServices userService) {
-        this.service = service;
+        this.taskService = service;
         this.userService = userService;
     }
     @GetMapping("/")
@@ -35,11 +35,8 @@ public class FrontController {
 
     @GetMapping("/tasks")
     public String tasks(Model model){
-        //Obtener informacion desde el servicio
-        List<Task> tasks = this.service.getTaskLists();
-        //Agregar variable al fronend
+        List<Task> tasks = this.taskService.getTaskLists();
         model.addAttribute("tasks", tasks);
-        //devolver el fronend
         return  "tasks";
     }
 
