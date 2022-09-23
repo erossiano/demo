@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TaskService{
+public class TaskService {
     private final TaskRepository repository;
 
-    public TaskService(TaskRepository repository){
+    public TaskService(TaskRepository repository) {
         this.repository = repository;
     }
 
@@ -23,26 +23,26 @@ public class TaskService{
         return this.repository.save(task);
     }
 
-    public Boolean setTaskDone(long id){
+    public Boolean setTaskDone(long id) {
         try {
             Optional<Task> task = this.repository.findById(id);
-            if(task.isPresent()){
+            if (task.isPresent()) {
                 task.get().setDone(true);
                 this.repository.save(task.get());
                 return true;
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return false;
     }
 
-    public Boolean deleteTask(long id){
+    public Boolean deleteTask(long id) {
         try {
-                this.repository.deleteById(id);
-                return true;
-            } catch (Exception e){
+            this.repository.deleteById(id);
+            return true;
+        } catch (Exception e) {
             return false;
         }
     }
