@@ -79,7 +79,6 @@
 								<java.source>${maven.compiler.source}</java.source>
 								<java.source>${maven.compiler.target}</java.source>
 							</additionalProperties>
-
 						</configuration>
 					</execution>
 				</executions>
